@@ -1,0 +1,15 @@
+Seeing customer had ooa_ and seeing screenshot of resource accounts does not provide the full list went on Torus invetigation.
+
+Get-CsOnlineApplicationEndpoints -ApplicationId "11cd3e2e-fccb-42ad-ad00-878b93575e07" -Tenant $tenant
+Get-CsOnlineApplicationEndpoint -Uri "hg_203d7ff7c47248349b15dd757630363d@mountanvil.com" -Tenant $tenant | fl *
+PhoneNumber    : 442038550086
+
++442038550086 assigned to CQ sip:hg_203d7ff7c47248349b15dd757630363d@mountanvil.com
+
+Solution:
+Set-CsOnlineApplicationEndpoint -Uri "hg_203d7ff7c47248349b15dd757630363d@mountanvil.com" -PhoneNumber ""
+Remove-CsOnlineApplicationEndpoint -Uri "hg_203d7ff7c47248349b15dd757630363d@mountanvil.com"
+Phone number can now be seen as unassigned in Teams Admin center.
+Issue resolved. closing AR.
+
+21298330
