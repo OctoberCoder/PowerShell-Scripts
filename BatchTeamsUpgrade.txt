@@ -1,0 +1,23 @@
+Set-ExecutionPolicy RemoteSigned
+winrm get winrm/config/client/auth
+$UserCredential = Get-Credential
+Import-Module SkypeOnlineConnector
+$sfboSession = New-CsOnlineSession -Credential $UserCredential
+Import-PSSession $sfboSession -AllowClobber
+$webclient=New-Object System.Net.WebClient
+$webclient.Proxy.Credentials = [System.Net.CredentialCache]::DefaultNetworkCredentials
+Install-Module MicrosoftTeams
+Import-Module MicrosoftTeams
+Connect-MicrosoftTeams
+
+
+$dataSetFilePath = "C:\Users\isaac.george\Desktop\grouphr.csv"
+
+$dataSet = Import-Csv "$($dataSetFilePath)" -Header UserId –delimiter ","
+
+ foreach($line in $dataSet)
+ {
+    $userId = $line.UserId
+    Write-Host $userId
+    Grant-CsTeamsUpgradePolicy -Identity @UserId -PolicyName Upgragetoteams
+}
